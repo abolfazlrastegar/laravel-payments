@@ -1,4 +1,4 @@
-![alt text](https://github.com/abolfazlrastegar/laravel-payments/blob/main/laravel-payments.png?raw=true)
+![alt text](https://github.com/abolfazlrastegar/laravel-payments/blob/main/laravel-payment.png?raw=true)
 ### Laravel-payments
 package laravel multi payment support form  (Zarinpal, Zibal, Idpay, Payir)
 
