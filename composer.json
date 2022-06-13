@@ -1,5 +1,8 @@
 {
     "name": "abolfazlrastegar/laravel-payments",
+    "description": "package payments for Laravel Framework.",
+    "keywords": ["payment", "laravel", "zarinpal", "idpay", "payir", "zibal"],
+    "type": "library",
     "authors": [
         {
             "name": "abolfazlrastegar",
