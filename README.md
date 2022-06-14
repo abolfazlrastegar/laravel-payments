@@ -120,7 +120,7 @@ To read more go to the website <a href="https://docs.zarinpal.com/paymentGateway
     | from 'Zibal', 'PayIr', 'IdPay', 'Zarinpal'
     */
 
-    'Default_payment' => 'Zibal',
+    'Default_payment' => 'Zarinpal',
 
     /*
     |-------------------------------------------
