@@ -49,16 +49,20 @@ composer require abolfazlrastegar/laravel-payments
 ### Use methode `verify`
 ```bash
      Payment::create('Zarinpal')
-        ->params()
+        ->params(['amount' => 10000,'authority' => 'A00000000000000000000000000202690354'])
         ->verfiy();
 ```
 ### Or 
 ```bash
      Payment::create()
         ->defaultBank() // set name bank to payments/config
-        ->params() 
+        ->params(['amount' => 10000,'authority' => 'A00000000000000000000000000202690354']) 
         ->verify();
 ```
+### Params method verify
+| zarinpal | zibal | idpay     | payir |                                
+|----------|-------|-----------|-------|
+ |   [<br/>'amount' => 10000,<br/> 'authority' => 'A00000000000000000000000000202690354'<br/>]| $trackId = 15966442233311 |[<br/>'id' => "d2e353189823079e1e4181772cff5292",<br/>'order_id' => '101'<br/>] |    $token = "توکن پرداخت"   |
 
 ### Use methods zarinpal 
 To read more go to the website <a href="https://docs.zarinpal.com/paymentGateway/setshare.html">zarinpal</a>
