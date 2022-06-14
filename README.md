@@ -20,7 +20,7 @@ composer require abolfazlrastegar/laravel-payments
 ```bash
  php artisan vendor:publish --provider="Abolfazlrastegar\LaravelPayments\Providers\PaymentServiceProvider" --force
 ```
-### docs Banks
+### Docs drivers
 
 <a href="https://docs.zarinpal.com/paymentGateway/guide/#%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A7%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA">zarinpal</a>
 
@@ -85,10 +85,12 @@ To read more go to the website <a href="https://docs.zarinpal.com/paymentGateway
        
        
        // method refund for return amount to user
+       
        Payment::create('Zarinpal')->refund('A00000000000000000000000000243676791')
        
        
        // method unVerified for show payments unVerified On behalf of the user
+       
        Payment::create('Zarinpal')->unVerified()
 ```
 ### config 
