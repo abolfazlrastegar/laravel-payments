@@ -18,7 +18,7 @@ composer require abolfazlrastegar/laravel-payments
 ```
 ### Publish provider
 ```bash
- php artisan vendor:publish --provider="Abolfazlrastegar\\LaravelPayments\\Providers\\PaymentServiceProvider" --force
+ php artisan vendor:publish --provider="Abolfazlrastegar\LaravelPayments\Providers\PaymentServiceProvider" --force
 ```
 
 ### Ues methode `request`
