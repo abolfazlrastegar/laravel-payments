@@ -68,6 +68,7 @@ composer require abolfazlrastegar/laravel-payments
 To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/setshare.html">zarinpal</a>
 ```bash
     // method checkout for Shared settlement
+    
     Payment::create('Zarinpal')
        ->amount(10000)
        ->callbackUrl('http://127.0.0.1:8000/')
@@ -90,12 +91,14 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
 
 ```bash
         // method refund for return amount to user
+        
        Payment::create('Zarinpal')
        ->refund('A00000000000000000000000000243676791')
 ```
 
 ```bash
         // method unVerified for show payments unVerified On behalf of the user
+        
        Payment::create('Zarinpal')
        ->unVerified()
 ```
