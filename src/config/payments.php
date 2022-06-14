@@ -22,7 +22,7 @@ return [
     | from 'Zibal', 'PayIr', 'IdPay', 'Zarinpal'
     */
 
-    'Default_payment' => 'Zibal',
+    'Default_payment' => 'Zarinpal',
 
     /*
     |-------------------------------------------
