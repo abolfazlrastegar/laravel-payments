@@ -21,7 +21,7 @@ composer require abolfazlrastegar/laravel-payments
  php artisan vendor:publish --provider="Abolfazlrastegar\LaravelPayments\Providers\PaymentServiceProvider" --force
 ```
 
-### Ues methode `request`
+### Use methode `request`
 ```bash
     Payment::create('Zarinpal')
         ->amount(10000)
@@ -36,7 +36,7 @@ composer require abolfazlrastegar/laravel-payments
     ->callbackUrl('http://127.0.0.1:8000/')
     ->request();
 ```
-### Ues methode `verify`
+### Use methode `verify`
 ```bash
      Payment::create('Zarinpal')
         ->params()
@@ -50,7 +50,7 @@ composer require abolfazlrastegar/laravel-payments
         ->verify();
 ```
 
-### Ues methods zarinpal
+### Use methods zarinpal
 ```bash
     // method 
     Payment::create('Zarinpal')
