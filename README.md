@@ -65,7 +65,7 @@ composer require abolfazlrastegar/laravel-payments
  |   [<br/>'amount' => 10000,<br/> 'authority' => 'A00000000000000000000000000202690354'<br/>]| $trackId = 15966442233311 |[<br/>'id' => "d2e353189823079e1e4181772cff5292",<br/>'order_id' => '101'<br/>] |    $token = "توکن پرداخت"   |
 
 ### Use methods zarinpal 
-To read more go to the website <a href="https://docs.zarinpal.com/paymentGateway/setshare.html">zarinpal</a>
+To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/setshare.html">zarinpal</a>
 ```bash
     // method checkout for Shared settlement
     Payment::create('Zarinpal')
