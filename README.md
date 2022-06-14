@@ -20,6 +20,16 @@ composer require abolfazlrastegar/laravel-payments
 ```bash
  php artisan vendor:publish --provider="Abolfazlrastegar\LaravelPayments\Providers\PaymentServiceProvider" --force
 ```
+### docs Banks
+
+<a href="https://docs.zarinpal.com/paymentGateway/guide/#%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D8%A7%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA">zarinpal</a>
+
+<a href="https://docs.zibal.ir/IPG/API">zibal</a>
+
+<a href="https://idpay.ir/web-service/v1.1/#8614460e98">idpay</a>
+
+<a href="https://docs.pay.ir/gateway/">payir</a>
+
 
 ### Use methode `request`
 ```bash
@@ -50,9 +60,10 @@ composer require abolfazlrastegar/laravel-payments
         ->verify();
 ```
 
-### Use methods zarinpal
+### Use methods zarinpal 
+To read more go to the website <a href="https://docs.zarinpal.com/paymentGateway/setshare.html">zarinpal</a>
 ```bash
-    // method 
+    // method checkout for Shared settlement
     Payment::create('Zarinpal')
        ->amount(10000)
        ->callbackUrl('http://127.0.0.1:8000/')
@@ -72,10 +83,12 @@ composer require abolfazlrastegar/laravel-payments
        ])
        ->checkout();
        
-       // method 
+       
+       // method refund for return amount to user
        Payment::create('Zarinpal')->refund('A00000000000000000000000000243676791')
        
-       // method
+       
+       // method unVerified for show payments unVerified On behalf of the user
        Payment::create('Zarinpal')->unVerified()
 ```
 ### config 
@@ -89,7 +102,7 @@ composer require abolfazlrastegar/laravel-payments
 
     /*
      |-------------------------------------------------
-     |
+     | 
      |-------------------------------------------------
      */
 
@@ -112,14 +125,14 @@ composer require abolfazlrastegar/laravel-payments
 
     /*
     |-------------------------------------------
-    | set description payment
+    | set test payment 
     |-------------------------------------------
     */
     'Test_payment' => false,
 
     /*
      |------------------------------------------
-     | active and inactive Bank portal
+     | set setting drivers
      |------------------------------------------
      | active = 'true'  and inactive = 'false'
      */
