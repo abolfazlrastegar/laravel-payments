@@ -97,7 +97,7 @@ class Zarinpal implements Bank
         $request = Http::withOptions(['verify' => config('payments.http_verify')])->withHeaders($this->setHeaders())
             ->post($this->apiVerfiy(), [
                 "merchant_id" => config('payments.drivers.Zarinpal.key'),
-                "authority" => $params['Authority'],
+                "authority" => $params['authority'],
                 "amount" => $params['amount']
             ]);
         $result = json_decode($request->getBody()->getContents(), true);
