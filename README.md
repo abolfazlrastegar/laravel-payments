@@ -2,8 +2,8 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/abolfazlrastegar/laravel-payments"><img src="https://img.shields.io/packagist/dt/abolfazlrastegar/laravel-payments" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/abolfazlrastegar/laravel-payments" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/github/license/abolfazlrastegar/laravel-payments" alt="License"></a>
+<a href="https://packagist.org/packages/abolfazlrastegar/laravel-payments"><img src="https://img.shields.io/packagist/v/abolfazlrastegar/laravel-payments" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/abolfazlrastegar/laravel-payments"><img src="https://img.shields.io/github/license/abolfazlrastegar/laravel-payments" alt="License"></a>
 </p>
 
 ### Laravel-payments
