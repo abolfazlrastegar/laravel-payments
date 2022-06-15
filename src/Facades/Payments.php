@@ -2,7 +2,10 @@
 namespace abolfazlrastegar\LaravelPayments\Facades;
 use Illuminate\Support\Facades\Facade;
 
-class Payments extends Facade
+class Payment extends Facade
 {
-    protected static function getFacadeAccessor() { return 'payments'; }
+    /**
+     * @return string
+     */
+    protected static function getFacadeAccessor() { return 'payment'; }
 }
