@@ -33,7 +33,7 @@ class Zarinpal implements Bank
 
     public function checkout ($api, $amount, $callbackURL, $params)
     {
-
+//        return $this->setParams($amount, $callbackURL, $params);
         $url = $this->apiRequest();
         $request = Http::withOptions(['verify' => config('payments.http_verify')])
             ->withHeaders($this->setHeaders())
