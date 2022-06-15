@@ -1,14 +1,14 @@
 ![alt text](https://github.com/abolfazlrastegar/laravel-payments/blob/main/laravel-payment.png?raw=true)
 
-[//]: # (<p align="center">)
+<p align="center">
 
-[//]: # (<a href="https://packagist.org/packages/abolfazlrastegar/laravel-payments"><img src="https://img.shields.io/packagist/dt/abolfazlrastegar/laravel-payments" alt="Total Downloads"></a>)
+<a href="https://packagist.org/packages/abolfazlrastegar/laravel-payments"><img src="https://img.shields.io/packagist/dt/abolfazlrastegar/laravel-payments" alt="Total Downloads"></a>
 
-[//]: # (<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>)
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/abolfazlrastegar/laravel-payments" alt="Latest Stable Version"></a>
 
-[//]: # (<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>)
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/github/license/abolfazlrastegar/laravel-payments" alt="License"></a>
 
-[//]: # (</p>)
+</p>
 ### Laravel-payments
 package laravel multi payment support form  (Zarinpal, Zibal, Idpay, Payir)
 
@@ -35,6 +35,7 @@ composer require abolfazlrastegar/laravel-payments
 ```bash
     Payment::create('Zarinpal')
         ->amount(10000)
+        ->api(true) // time use form api add methode api()
         ->callbackUrl('http://127.0.0.1:8000/')
         ->request();
 ```
@@ -42,6 +43,7 @@ composer require abolfazlrastegar/laravel-payments
 ```bash
     Payment::create()
     ->defaultBank() // set name bank to payments/config
+    ->api(true) // time use form api add methode api()
     ->amount(10000)
     ->callbackUrl('http://127.0.0.1:8000/')
     ->request();
@@ -72,7 +74,7 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
     Payment::create('Zarinpal')
        ->amount(10000)
        ->callbackUrl('http://127.0.0.1:8000/')
-       ->api(true)
+       ->api(true) // time use form api add methode api()
        ->defaultBank()
         ->params([
            [
