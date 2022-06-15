@@ -32,7 +32,7 @@
                 "Abolfazlrastegar\\LaravelPayments\\Providers\\PaymentServiceProvider"
             ],
             "aliases": {
-                "Payments": "Abolfazlrastegar\\LaravelPayments\\Facades\\Payments"
+                "Payments": "Abolfazlrastegar\\LaravelPayments\\Facades\\Payment"
             }
         }
     }
