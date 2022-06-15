@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Abolfazlrastegar\LaravelPayments\Payment;
+use Abolfazlrastegar\LaravelPayments\Payments;
 use PHPUnit\Framework\TestCase;
 
 class TestPayment extends TestCase
@@ -10,7 +10,7 @@ class TestPayment extends TestCase
     /** @test */
     public function TestRequestBank ()
     {
-        $pa = Payment::create()
+        $pa = Payments::create()
             ->defaultBank()
             ->api(true)
             ->amount(10000)
@@ -23,7 +23,7 @@ class TestPayment extends TestCase
     /** @test */
     public function TestCheckoutBank ()
     {
-        $pa = Payment::create()
+        $pa = Payments::create()
             ->defaultBank()
             ->api(true)
             ->amount(10000)
@@ -36,7 +36,7 @@ class TestPayment extends TestCase
     /** @test */
     public function TestUnVerifiedZarinpal ()
     {
-        $unVerified = Payment::create('Zarinpal')->unVerified();
+        $unVerified = Payments::create('Zarinpal')->unVerified();
 
         $this->assertEquals($unVerified, $unVerified);
     }
