@@ -5,12 +5,13 @@ namespace abolfazlrastegar\LaravelPayments\Providers;
 use Abolfazlrastegar\LaravelPayments\Payment;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
+use phpDocumentor\Reflection\Types\This;
 
 class PaymentServiceProvider extends ServiceProvider
 {
     public function register ()
     {
-      App::bind('payments', function () {
+      $this->app->bind('payment', function () {
             return new Payment();
         });
     }
