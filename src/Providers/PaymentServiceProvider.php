@@ -14,6 +14,8 @@ class PaymentServiceProvider extends ServiceProvider
       $this->app->bind('payments', function () {
             return new Payments();
         });
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Payments', "Abolfazlrastegar\LaravelPayments\Facades\Payments");
     }
 
     public function boot ()
