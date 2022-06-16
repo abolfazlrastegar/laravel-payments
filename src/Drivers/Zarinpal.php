@@ -33,7 +33,6 @@ class Zarinpal implements Bank
 
     public function checkout ($api, $amount, $callbackURL, $params)
     {
-//        return $this->setParams($amount, $callbackURL, $params);
         $url = $this->apiRequest();
         $request = Http::withOptions(['verify' => config('payments.http_verify')])
             ->withHeaders($this->setHeaders())
@@ -80,7 +79,6 @@ class Zarinpal implements Bank
                 "authority" => $authority
             ]);
         $response = json_decode($request->getBody()->getContents(), true);
-//        return $response;
         if (!empty($response['errors'])){
             return $response['errors'][0]['message'] . '  ' . $response['errors'][0]['readable_code'];
         }
@@ -120,8 +118,7 @@ class Zarinpal implements Bank
         $user = Auth::user();
         $params = [
             "merchant_id" => config('payments.drivers.Zarinpal.key'),
-            "amount" => $amount,
-            "currency" => config('payments.currency'),
+            "amount" => config('payments.currency') === 'rtt' ? $amount * 10 : $amount,
             "callback_url" => $callbackURL,
             "description" => config('payments.Description_payment'),
             "metadata" => [
@@ -133,8 +130,7 @@ class Zarinpal implements Bank
         {
             $params = [
                 "merchant_id" => config('payments.drivers.Zarinpal.key'),
-                "amount" => $amount,
-                "currency" => config('payments.currency'),
+                "amount" => config('payments.currency') === 'rtt' ? $amount * 10 : $amount,
                 "callback_url" => $callbackURL,
                 "description" => config('payments.Description_payment'),
                 "metadata" => [
@@ -167,7 +163,7 @@ class Zarinpal implements Bank
         $api = 'https://api.zarinpal.com/pg/v4/Payment/verify.json';
         if (config('payments.Test_payment'))
         {
-            $api = 'https://sandbox.zarinpal.com/pg/v4/payment/verify.json';
+            $api = config('payments.drivers.Zarinpal.api_test_verify');
         }
         return $api;
     }
@@ -181,8 +177,8 @@ class Zarinpal implements Bank
         $pay = 'https://www.zarinpal.com/pg/StartPay/';
         if (config('payments.Test_payment'))
         {
-            $request = 'https://sandbox.zarinpal.com/pg/v4/payment/request.json';
-            $pay = 'https://sandbox.zarinpal.com/pg/StartPay/';
+            $request = config('payments.drivers.Zarinpal.api_test_request');
+            $pay = config('payments.drivers.Zarinpal.api_test_py');
         }
         return [
            'request' => $request,
