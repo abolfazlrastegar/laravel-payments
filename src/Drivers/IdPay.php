@@ -33,12 +33,12 @@ class IdPay implements Bank
      * @param $param
      * @return mixed
      */
-    public function verify ($params_idpay)
+    public function verify ($params)
     {
         $request = Http::withOptions(['verify' => config('payments.http_verify')])
             ->withHeaders($this->setHeaders())->post( 'https://api.idpay.ir/v1.1/payment/verify', [
-                'id' => $params_idpay['id'],
-                'order_id' => $params_idpay['order_id'],
+                'id' => $params['id'],
+                'order_id' => $params['order_id'],
         ]);
         return json_decode($request->getBody()->getContents(), true);
     }
