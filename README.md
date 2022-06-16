@@ -33,14 +33,14 @@ composer require abolfazlrastegar/laravel-payments
     Payment::create('IdPay')
         ->amount(10000)
         ->api(true) // time use form api add methode api()
-        ->callbackUrl('http://127.0.0.1:8000/')
+        ->callbackUrl('http://127.0.0.1:8000/verify')
         ->request();
 ```
 ### Or
 ```bash
     Payment::create(IdPay)
     ->amount(10000)
-    ->callbackUrl('http://127.0.0.1:8000/')
+    ->callbackUrl('http://127.0.0.1:8000/verify')
     ->request();
 ```
 ### Or
@@ -49,7 +49,7 @@ composer require abolfazlrastegar/laravel-payments
     ->defaultBank() // set name bank to payments/config
     ->api(true) // time use form api add methode api()
     ->amount(10000)
-    ->callbackUrl('http://127.0.0.1:8000/')
+    ->callbackUrl('http://127.0.0.1:8000/verify')
     ->request();
 ```
 ### Use methode `verify`
@@ -77,7 +77,7 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
     
     Payment::create('Zarinpal')
        ->amount(10000)
-       ->callbackUrl('http://127.0.0.1:8000/')
+       ->callbackUrl('http://127.0.0.1:8000/verify')
        ->api(true) // time use form api add methode api()
        ->defaultBank()
         ->params([
