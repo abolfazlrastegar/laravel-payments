@@ -3,9 +3,7 @@
 namespace abolfazlrastegar\LaravelPayments\Providers;
 
 use Abolfazlrastegar\LaravelPayments\Payments;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use phpDocumentor\Reflection\Types\This;
 
 class PaymentServiceProvider extends ServiceProvider
 {
