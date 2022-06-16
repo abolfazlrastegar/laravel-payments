@@ -13,10 +13,9 @@ class IdPay implements Bank
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function request ($api, $amount, $callbackURL)
+    public function request ($api, $amount, $callbackURL, $info_user)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())->post('https://api.idpay.ir/v1.1/payment', $this->setParams($amount, $callbackURL));
+        $request = Http::withHeaders($this->setHeaders())->post('https://api.idpay.ir/v1.1/payment', $this->setParams($amount, $callbackURL, $info_user));
         $response = json_decode($request->getBody()->getContents(), true);
         if (isset($response['error_message']) || isset($response['error_code']))
         {
@@ -35,8 +34,7 @@ class IdPay implements Bank
      */
     public function verify ($params)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())->post( 'https://api.idpay.ir/v1.1/payment/verify', [
+        $request = Http::withHeaders($this->setHeaders())->post( 'https://api.idpay.ir/v1.1/payment/verify', [
                 'id' => $params['id'],
                 'order_id' => $params['order_id'],
         ]);
@@ -48,15 +46,14 @@ class IdPay implements Bank
      * @param $callbackURL
      * @return array
      */
-    private function setParams ($amount, $callbackURL)
+    private function setParams ($amount, $callbackURL, $info_user)
     {
-        $user = Auth::user();
         return [
             'order_id' => time(),
             'amount' => config('payments.currency') == 'rtt' ? $amount * 10 : $amount,
-            'name' => $user->name .' '. $user->family,
-            'phone' => $user->mobile,
-            'mail' => $user->email,
+            'name' => $info_user['name'],
+            'phone' => $info_user['mobile'],
+            'mail' => $info_user['email'],
             'desc' => config('payments.Description_payment'),
             'callback' => $callbackURL,
         ];
