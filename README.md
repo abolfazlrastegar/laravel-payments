@@ -76,14 +76,14 @@ composer require abolfazlrastegar/laravel-payments
 ### Use methode `verify`
 ```bash
      Payment::create('IdPay')
-        ->params(['amount' => 10000,'authority' => 'A00000000000000000000000000202690354'])
+        ->params(['id' => '612218274d3f1e755e1684fe7db63e35','order_id' => '1655381732'])
         ->verfiy();
 ```
 ### or 
 ```bash
      Payment::create()
         ->defaultBank() // set name bank to payments/config
-        ->params(['amount' => 10000,'authority' => 'A00000000000000000000000000202690354']) 
+        ->params(['id' => '612218274d3f1e755e1684fe7db63e35','order_id' => '1655381732']) 
         ->verify();
 ```
 ### Params method `verify`
