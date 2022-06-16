@@ -13,11 +13,10 @@ class PayIr implements Bank
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function request($api, $amount, $callbackURL)
+    public function request($api, $amount, $callbackURL, $info_user)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())
-            ->post('https://pay.ir/pg/send', $this->setParams($amount, $callbackURL));
+        $request = Http::withHeaders($this->setHeaders())
+            ->post('https://pay.ir/pg/send', $this->setParams($amount, $callbackURL, $info_user));
         $response = json_decode($request->getBody()->getContents(), true);
         if (!$response['status'])
             return $response['errorMessage'];
@@ -37,8 +36,7 @@ class PayIr implements Bank
      */
     public function verify($params)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())
+        $request = Http::withHeaders($this->setHeaders())
             ->post('https://pay.ir/pg/verify', [
                 'api' => config('payments.Test_payment') == false ? config('payments.drivers.PayIr.key') : 'test',
                 'token' => $params,
@@ -58,13 +56,12 @@ class PayIr implements Bank
      * @param $CallbackURL
      * @return array
      */
-    private function setParams ($amount, $CallbackURL) {
-        $user = Auth::user();
+    private function setParams ($amount, $CallbackURL, $info_user) {
         return [
             'api' => config('payments.Test_payment') == false ? config('payments.drivers.PayIr.key') : 'test',
             'amount' => config('payments.currency') == 'rtt' ? $amount * 10 : $amount,
-            'name' => $user->name .' '. $user->family,
-            'mobile' => $user->mobile,
+            'name' => $info_user['name'],
+            'mobile' => $info_user['mobile'],
             'factorNumber' => time(),
             'description' => config('payments.Description_payment'),
             'redirect' => $CallbackURL,
