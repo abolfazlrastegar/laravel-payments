@@ -100,7 +100,6 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
        ->amount(10000)
        ->callbackUrl('http://127.0.0.1:8000/verify')
        ->api(true) // time use form api add methode api()
-       ->defaultBank()
         ->params([
            [
                "iban" => "IR130570028780010957775103",
