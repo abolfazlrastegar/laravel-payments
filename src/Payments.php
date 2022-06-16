@@ -137,7 +137,7 @@ class Payments
     public function verify()
     {
         $bank = $this->makeBank();
-        return $bank->verify($this->api, $this->params);
+        return $bank->verify($this->params);
     }
 
     /**
