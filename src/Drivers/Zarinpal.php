@@ -13,12 +13,11 @@ class Zarinpal implements Bank
      * @param $param
      * @return string|void
      */
-    public function request($api, $amount, $callbackURL)
+    public function request($api, $amount, $callbackURL, $info_user)
     {
         $url = $this->apiRequest();
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())
-            ->post($url['request'], $this->setParams($amount, $callbackURL));
+        $request = Http::withHeaders($this->setHeaders())
+            ->post($url['request'], $this->setParams($amount, $callbackURL, $info_user));
         $response = json_decode($request->getBody()->getContents(), true);
         if (!empty($response['errors'])|| !empty($response['data']['code']) != 100){
             return $response['errors']['message'] . ':' .  $response['errors']['code'];
@@ -31,12 +30,11 @@ class Zarinpal implements Bank
     }
 
 
-    public function checkout ($api, $amount, $callbackURL, $params)
+    public function checkout ($api, $amount, $callbackURL, $params, $info_user)
     {
         $url = $this->apiRequest();
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())
-            ->post($url['request'], $this->setParams($amount, $callbackURL, $params));
+        $request = Http::withHeaders($this->setHeaders())
+            ->post($url['request'], $this->setParams($amount, $callbackURL, $info_user, $params));
         $response = json_decode($request->getBody()->getContents(), true);
         if (!empty($response['errors'])|| !empty($response['data']['code']) != 100){
             return $response['errors']['message'] . ':' .  $response['errors']['code'];
@@ -53,8 +51,7 @@ class Zarinpal implements Bank
      */
     public function unVerified ()
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())
+        $request = Http::withHeaders($this->setHeaders())
             ->post('https://api.zarinpal.com/pg/v4/payment/unVerified.json', ["merchant_id" => config('payments.drivers.Zarinpal.key')]);
         $response = json_decode($request->getBody()->getContents(), true);
         if (!empty($response['errors'])|| !empty($response['data']['code']) != 100){
@@ -68,8 +65,7 @@ class Zarinpal implements Bank
      * @return mixed|string
      */
     public function refund ($authority) {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders([
+        $request = Http::withHeaders([
                 'Accept: application/json',
                 'authorization:' . config('payments.drivers.Zarinpal.access_Token'),
                 'Content-Type: application/json',
@@ -92,7 +88,7 @@ class Zarinpal implements Bank
      */
     public function verify ($params)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])->withHeaders($this->setHeaders())
+        $request = Http::withHeaders($this->setHeaders())
             ->post($this->apiVerfiy(), [
                 "merchant_id" => config('payments.drivers.Zarinpal.key'),
                 "authority" => $params['authority'],
@@ -113,7 +109,7 @@ class Zarinpal implements Bank
      * @param $callbackURL
      * @return array
      */
-    private function setParams ($amount, $callbackURL, $wages = null)
+    private function setParams ($amount, $callbackURL, $info_user, $wages = null)
     {
         $user = Auth::user();
         $params = [
@@ -122,8 +118,8 @@ class Zarinpal implements Bank
             "callback_url" => $callbackURL,
             "description" => config('payments.Description_payment'),
             "metadata" => [
-                "email" => $user->email,
-                "mobile" => $user->mobile
+                "email" => $info_user['email'],
+                "mobile" => $info_user['mobile']
             ],
         ];
         if ($wages !== null)
@@ -134,8 +130,8 @@ class Zarinpal implements Bank
                 "callback_url" => $callbackURL,
                 "description" => config('payments.Description_payment'),
                 "metadata" => [
-                    "email" => $user->email,
-                    "mobile" => $user->mobile
+                    "email" => $info_user['email'],
+                    "mobile" => $info_user['mobile']
                 ],
                 "wages" => $wages
             ];
