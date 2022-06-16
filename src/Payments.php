@@ -36,6 +36,7 @@ class Payments
      */
     protected $api = false;
 
+    protected $user;
     /**
      * @param $name_bank
      * @return static
@@ -117,6 +118,16 @@ class Payments
         return $this;
     }
 
+    /**
+     * @param $info_user
+     * @return $this
+     */
+    public function infoUser ($info_user)
+    {
+        $this->user = $info_user;
+
+        return $this;
+    }
 
     /**
      * request bank for payment
@@ -126,7 +137,7 @@ class Payments
     public function request()
     {
         $bank = $this->makeBank();
-        return $bank->request($this->api, $this->amount, $this->callbackURL);
+        return $bank->request($this->api, $this->amount, $this->callbackURL, $this->user);
     }
 
     /**
