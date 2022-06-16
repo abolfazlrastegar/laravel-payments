@@ -13,11 +13,10 @@ class Zibal implements Bank
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function request($api, $amount, $callbackURL)
+    public function request($api, $amount, $callbackURL, $info_user)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())
-            ->post('https://gateway.zibal.ir/v1/request', $this->setParams($amount, $callbackURL));
+        $request = Http::withHeaders($this->setHeaders())
+            ->post('https://gateway.zibal.ir/v1/request', $this->setParams($amount, $callbackURL, $info_user));
         $response = json_decode($request->getBody()->getContents(), true);
         if ($response['result'] !== 100) {
             return ['message' => $response['message'], 'code'   => $response['result']];
@@ -37,8 +36,7 @@ class Zibal implements Bank
      */
     public function verify($params)
     {
-        $request = Http::withOptions(['verify' => config('payments.http_verify')])
-            ->withHeaders($this->setHeaders())->post('https://gateway.zibal.ir/v1/verify', [
+        $request = Http::withHeaders($this->setHeaders())->post('https://gateway.zibal.ir/v1/verify', [
                 "merchant" => config('payments.Api_key.Zibal'),
                 "trackId" => $params
             ]);
@@ -57,13 +55,13 @@ class Zibal implements Bank
      * @param $callbackURL
      * @return array
      */
-    private function setParams ($amount, $callbackURL) {
+    private function setParams ($amount, $callbackURL, $info_user) {
         return [
             "merchant"=> config('payments.Test_payment') == false ? config('payments.drivers.Zibal.key') : 'zibal',
             "callbackUrl"=> $callbackURL,
             "amount"=> config('payments.currency') == 'rtt' ? $amount * 10 : $amount,
             "orderId"=> time(),
-            "mobile"=> Auth::user()->mobile
+            "mobile"=> $info_user['mobile']
         ];
     }
 
