@@ -171,7 +171,10 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
         'Zarinpal' => [
             'key' => '',
             'access_Token' => '',
-            'status' => true
+            'status' => true,
+            'api_test_request' => 'https://sandbox.zarinpal.com/pg/v4/payment/request.json',
+            'api_test_py' => 'https://sandbox.zarinpal.com/pg/StartPay/',
+            'api_test_verify' => 'https://sandbox.zarinpal.com/pg/v4/payment/verify.json',
         ],
 
         'Zibal' =>  [
