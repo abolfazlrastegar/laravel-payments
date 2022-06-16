@@ -34,38 +34,59 @@ composer require abolfazlrastegar/laravel-payments
         ->amount(10000)
         ->api(true) // time use form api add methode api()
         ->callbackUrl('http://127.0.0.1:8000/verify')
+         ->infoUser([
+            'name' => $user->name .' '. $user->family,
+            'mobile' => $user->mobile,
+            'email' => $user->email,
+        ])
         ->request();
 ```
-### Or
+### or
 ```bash
-    Payment::create(IdPay)
+    Payment::create('IdPay')
     ->amount(10000)
     ->callbackUrl('http://127.0.0.1:8000/verify')
+     ->infoUser([
+        'name' => $user->name .' '. $user->family,
+        'mobile' => $user->mobile,
+        'email' => $user->email,
+    ])
     ->request();
 ```
-### Or
+### or
 ```bash
     Payment::create()
     ->defaultBank() // set name bank to payments/config
     ->api(true) // time use form api add methode api()
     ->amount(10000)
     ->callbackUrl('http://127.0.0.1:8000/verify')
+     ->infoUser([
+        'name' => $user->name .' '. $user->family,
+        'mobile' => $user->mobile,
+        'email' => $user->email,
+    ])
     ->request();
 ```
+
+### infoUser method `request`
+| zarinpal | zibal | idpay     | payir |                                
+|---------|-------|-----------|------|
+|[<br/>'mobile' => $user->mobile,<br/>'email' => $user->email<br/>]  | [<br/>'mobile' => $user->mobile<br/>]  | [<br/>'name' => $user->name .' '. $user->family,<br/>'mobile' => $user->mobile,<br/>'email' => $user->email<br/>] | [<br/>'mobile' => $user->mobile,<br/> 'name' => $user->name .' '. $user->family<br/>] |
+
 ### Use methode `verify`
 ```bash
      Payment::create('IdPay')
         ->params(['amount' => 10000,'authority' => 'A00000000000000000000000000202690354'])
         ->verfiy();
 ```
-### Or 
+### or 
 ```bash
      Payment::create()
         ->defaultBank() // set name bank to payments/config
         ->params(['amount' => 10000,'authority' => 'A00000000000000000000000000202690354']) 
         ->verify();
 ```
-### Params method verify
+### Params method `verify`
 | zarinpal | zibal | idpay     | payir |                                
 |----------|-------|-----------|-------|
  |   [<br/>'amount' => 10000,<br/> 'authority' => 'A00000000000000000000000000202690354'<br/>]| $trackId = 15966442233311 |[<br/>'id' => "d2e353189823079e1e4181772cff5292",<br/>'order_id' => '101'<br/>] |    $token = "توکن پرداخت"   |
@@ -94,14 +115,14 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
        ])
        ->checkout()
 ```
-
+#### Method refund zarinpal
 ```bash
         // method refund for return amount to user
         
        Payment::create('Zarinpal')
        ->refund('A00000000000000000000000000243676791')
 ```
-
+#### Method unVerified zarinpal
 ```bash
         // method unVerified for show payments unVerified On behalf of the user
         
@@ -117,13 +138,6 @@ To read more go to the Docs <a href="https://docs.zarinpal.com/paymentGateway/se
     */
     'currency' => 'rtt',
 
-    /*
-     |-------------------------------------------------
-     | 
-     |-------------------------------------------------
-     */
-
-    'http_verify' => true,
     /*
     |--------------------------------------------
     | set default payment
